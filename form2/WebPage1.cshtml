@@ -1,0 +1,105 @@
+﻿@{
+
+    string message = "";
+    string message3 = "";
+    string season = "";
+    string month = "";
+    string message4 = "";
+
+    if (Request.QueryString["day"] != null)
+    {
+        message = String.Format("You have chosen : " + Request.QueryString["day"]);
+    }
+    if (Request.QueryString["season"] != null)
+    {
+        string[] message2 = Request.QueryString["season"].Split(',');
+        season = String.Format("You have chosen {0} seasons and it is {1}", message2.Length,Request.QueryString["season"]);
+        message3 = "<ul>";
+        foreach (string x in message2)
+        {
+            message3 += String.Format("<li>{0}</li>",x);
+        }
+        message3 += "</ul>";
+
+    }
+    if (Request.QueryString["month"] != null)
+    {
+        month = String.Format("You have chosen : " + Request.QueryString["month"]);
+    }
+    if (Request.QueryString["location"] != null)
+    {
+        message4 = "You picked : " + Request.QueryString["location"];
+    }
+
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <form method="get">
+        <label for="day">Pick a day </label>
+        <input id="day1" value="monday" type="radio" name="day" />
+        <label for="day1">Monday</label>
+        <input id="day2" value="tuesday" type="radio" name="day" />
+        <label for="day2">Tuesday</label>
+        <input id="day3" value="wednesday" type="radio" name="day" />
+        <label for="day3">Wednesday</label>
+        <input id="day4" value="thursday" type="radio" name="day" />
+        <label for="day4">Thursday</label>
+        <input id="day5" value="friday" type="radio" name="day" />
+        <label for="day5">Friday</label>
+        <br />
+
+        <label for="month">Pick a month</label>
+        <select name="month">
+            <option value="january">January</option>
+            <option value="febuary">Febuary</option>
+            <option value="march">March</option>
+            <option value="april">April</option>
+            <option value="may">May</option>
+            <option value="june">June</option>
+            <option value="july">July</option>
+            <option value="auguest">auguest</option>
+            <option value="september">September</option>
+            <option value="october">October</option>
+            <option value="november">November</option>
+            <option value="december">December</option>
+        </select><br />
+
+        <label for="season">Pick a season (hold Crtl to select more)</label><br />
+        <select name="season" multiple>
+            <option value="spring">Spring</option>
+            <option value="summer">Summer</option>
+            <option value="autumn">Autumn</option>
+            <option value="winter">Winter</option>
+        </select><br />
+        <input type="text" name="location" list="locations"/>
+            <datalist id="locations">
+                <option>Sligo</option>
+                <option>Dublin</option>
+                <option>Derry</option>
+                <option>Donegal</option>
+                <option>Kerry</option>
+                <option>Kildare</option>
+                <option>Leitrim</option>
+                <option>Longford</option>
+                <option>Laois</option>
+                <option>Limerick</option>
+                <option>Louth</option>
+            </datalist>
+
+        <input type="submit" id="submit" name="submit" value="Submit Your Options" />
+
+    </form>
+    <br />
+
+    @Html.Raw(message)<br />
+    @Html.Raw(month)<br />
+    @Html.Raw(season)<br />
+    @Html.Raw(message3)<br />
+    @Html.Raw(message4)<br />
+</body>
+</html>
